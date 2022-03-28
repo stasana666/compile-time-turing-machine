@@ -32,7 +32,7 @@ using CircleStart = struct CircleStart;
 
 template <bool Value>
 struct Circle {
-    static const bool value = value;
+    static const bool value = Value;
 };
 
 using FindOpenBracket = struct FindOpenBracket;

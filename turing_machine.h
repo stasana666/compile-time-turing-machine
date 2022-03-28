@@ -162,11 +162,39 @@ template <class state, class left, class cur, class right>
 struct ApplyRule<RuleList<>, state, Tape<left, cur, right>>;
 
 template <class...>
+struct FindRule;
+
+template <class rule, class... rulesArgs, class State, class Char>
+struct FindRule<RuleList<rule, rulesArgs...>, State, Char> {
+    using value = typename FindRule<RuleList<rulesArgs...>, State, Char>::value;
+};
+
+template <class srcState, class srcChar, class dstState, class dstChar, class move, class... rulesArgs>
+struct FindRule<RuleList<Rule<srcState, srcChar, dstState, dstChar, move>, rulesArgs...>, srcState, srcChar> {
+    using value = Rule<srcState, srcChar, dstState, dstChar, move>;
+};
+
+template <class...>
+struct RulesManager;
+
+template <class... rulesArgs>
+struct RulesManager<RuleList<rulesArgs...>> {
+    template <class State, class Char>
+    using CurrentRule = typename FindRule<RuleList<rulesArgs...>, State, Char>::value;
+};
+
+template <class...>
 struct TuringMachine;
 
 template <class... rulesArgs, class state, class left, class cur, class right>
 struct TuringMachine<RuleList<rulesArgs...>, state, Tape<left, cur, right>> {
-    using next = ApplyRule<RuleList<rulesArgs...>, state, Tape<left, cur, right>>;
+    using next = ApplyRule<
+                    RuleList<
+                        typename RulesManager<RuleList<rulesArgs...>>::template CurrentRule<state, cur>
+                    >,
+                    state,
+                    Tape<left, cur, right>
+                >;
 public:
     using result = typename TuringMachine<
                                 RuleList<rulesArgs...>,
