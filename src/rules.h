@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../turing_machine.h"
+#include "turing_machine.h"
 
 #include "chars.h"
 #include "states.h"

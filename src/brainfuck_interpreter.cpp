@@ -1,4 +1,4 @@
-#include "../turing_machine.h"
+#include "turing_machine.h"
 
 #include "chars.h"
 #include "rules.h"

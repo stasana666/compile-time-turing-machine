@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../turing_machine.h"
+#include "turing_machine.h"
 
 struct InputBegin;
 struct InputEnd;

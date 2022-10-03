@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../turing_machine.h"
+#include "turing_machine.h"
 
 using ReturnToCommand = struct ReturnToCommand;
 using ReturnToCommandRight = struct ReturnToCommandRight;

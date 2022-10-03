@@ -1,4 +1,4 @@
-#include "turing_machine.h"
+#include "../src/turing_machine.h"
 
 #define ASSERT_EQUAL(...) static_assert(IsSameV<__VA_ARGS__>, "aren't equal");
 
